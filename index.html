@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake Game</title>
+  </head>
+
+  <body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const snakeSize = 20;
+      let snake = [{ x: canvas.width / 2, y: canvas.height / 2 }];
+      let dx = 0;
+      let dy = -snakeSize;
+      let apple = {
+        x: Math.floor(Math.random() * canvas.width),
+        y: Math.floor(Math.random() * canvas.height),
+      };
+
+      let lastRenderTime = 0;
+      const SNAKE_SPEED = 5; // The snake moves this many squares per second
+
+      function drawSnake() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "green";
+        snake.forEach((seg) => {
+          ctx.fillRect(seg.x, seg.y, snakeSize, snakeSize);
+        });
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(apple.x, apple.y, snakeSize, snakeSize);
+      }
+
+      function moveSnake() {
+        const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+        snake.unshift(head);
+
+        if (
+          head.x < apple.x + snakeSize &&
+          head.x + snakeSize > apple.x &&
+          head.y < apple.y + snakeSize &&
+          head.y + snakeSize > apple.y
+        ) {
+          apple = {
+            x: Math.floor(Math.random() * canvas.width),
+            y: Math.floor(Math.random() * canvas.height),
+          };
+        } else {
+          snake.pop();
+        }
+      }
+
+      function changeDirection(e) {
+        const key = e.key;
+        if (key === "ArrowUp" && dy !== snakeSize) {
+          dx = 0;
+          dy = -snakeSize;
+        } else if (key === "ArrowDown" && dy !== -snakeSize) {
+          dx = 0;
+          dy = snakeSize;
+        } else if (key === "ArrowLeft" && dx !== snakeSize) {
+          dx = -snakeSize;
+          dy = 0;
+        } else if (key === "ArrowRight" && dx !== -snakeSize) {
+          dx = snakeSize;
+          dy = 0;
+        }
+      }
+
+      function checkCollision() {
+        if (
+          snake[0].x < 0 ||
+          snake[0].x >= canvas.width ||
+          snake[0].y < 0 ||
+          snake[0].y >= canvas.height
+        ) {
+          clearInterval(gameInterval);
+          alert("Game Over!");
+        }
+
+        for (let i = 1; i < snake.length; i++) {
+          if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+            clearInterval(gameInterval);
+            alert("Game Over!");
+          }
+        }
+      }
+
+      function gameLoop(currentTime) {
+        requestAnimationFrame(gameLoop);
+        const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
+        if (secondsSinceLastRender < 1 / SNAKE_SPEED) return;
+
+        lastRenderTime = currentTime;
+
+        moveSnake();
+        checkCollision();
+        drawSnake();
+      }
+
+      document.addEventListener("keydown", changeDirection);
+
+      requestAnimationFrame(gameLoop);
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </body>
+</html>
