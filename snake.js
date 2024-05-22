@@ -53,10 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function drawFood() {
-        const foodElement = createBoardElement('div', 'food');
-        setPosition(foodElement, food.x, food.y);
-        gameBoard.appendChild(foodElement);
-    }
+    food = generateFoodPosition(); // Generate initial position of the food
+    const foodElement = createBoardElement('div', 'food');
+    setPosition(foodElement, food.x, food.y);
+    gameBoard.appendChild(foodElement);
+}
+
 
     function setPosition(element, x, y) {
         element.style.gridColumnStart = x;
