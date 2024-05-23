@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classic Games</title>
+    <style>
+        body {
+            background-color: #282828;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 50%; /* Adjust this value to change the width of the container */
+        }
+        .game {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #fff;
+            text-align: center;
+            background-color: #3c3c3c;
+            border-radius: 10px;
+            transition: transform .2s;
+            background-size: cover;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            width: 200px; /* Adjust this value to change the width of the buttons */
+        }
+        .game:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+        h1, h2 {
+            color: #ff6347;
+        }
+        #game1 {
+            background-image: url('images/PacMan.jpg');
+        }
+        #snake-game {
+            background-image: url('images/SnakeGame2D.jpg'); /* Replace 'images/game2_background.jpg' with the path to your image */
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Classic Games!</h1>
+    <div class="game-container">
+        <a href="game1.html">
+            <div class="game" id="game1">
+                <h2>Pac-Man</h2>
+            </div>
+        </a>
+        <a href="game2.html">
+            <div class="game" id="snake-game">
+                <h2>Snake Game</h2>
+            </div>
+        </a>
+        <!-- Add more games as needed -->
+    </div>
+</body>
+</html>
