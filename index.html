@@ -15,11 +15,11 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            width: 50%; /* Adjust this value to change the width of the container */
+            width: 60%; /* Adjust this value to change the width of the container */
         }
         .game {
             margin: 20px;
-            padding: 20px;
+            padding: 30px;
             border: 1px solid #fff;
             text-align: center;
             background-color: #3c3c3c;
@@ -42,13 +42,18 @@
         h1, h2 {
             color: #ff6347;
         }
+        h2 {
+            font-size: 30px; /* Increase this value to make the titles bigger */
+            margin: 20px 0; /* Adjust margin if needed */
+            font-weight: bold; /* Make the text bolder */
+        }
         #game1 {
-            background-image: url('images/PacMan.jpg');
+            background-image: url('images/NEONBRICKS.jpg');
         }
         #snake-game {
             background-image: url('images/SnakeGame2D.jpg'); /* Replace 'images/game2_background.jpg' with the path to your image */
         }
-    </style>
+    </style>    
     <!-- Include Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="icon" type="image/x-icon" href="images/arcade.ico">
@@ -61,7 +66,7 @@
         <a href="game1.html">
             <div class="game" id="game1">
                 <i class="fa fa-gamepad"></i> <!-- Icon: Gamepad -->
-                <h2>Pac-Man</h2>
+                <h2>Neon Bricks</h2>
             </div>
         </a>
         <a href="game2.html">
